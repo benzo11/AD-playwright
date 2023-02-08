@@ -1,8 +1,10 @@
 name: Playwright Tests
 on:
   push:
-    branches: [master]
+    # On this branches push we will activate the action.
+    # branches: [master]
   pull_request:
+    # On pull requests activate the action.
     branches: [master]
 jobs:
   test:
