@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect, devices } from '@playwright/test';
 import { chromium, firefox, webkit } from '@playwright/test';
 
 /**
@@ -15,10 +15,19 @@ test('Test on Firefox', async () => {
 
 test('Test on Chromium', async () => {
   const browser = await chromium.launch();
+
+  // Simulate on Iphone 12.
+  const mycustomDevices = devices['iPhone 12'];
+  const context = await browser.newContext({
+    ...mycustomDevices
+  });
+  // Uncomment line bellow to use iphone12.
+  //const page = await context.newPage();
   const page = await browser.newPage();
+
   await page.goto('https://agiledrop.com');
   expect(page).toBeTruthy();
-  await page.screenshot({path: 'chormium.png'});
+  await page.screenshot({path: 'chromium_desktop.png'});
   await browser.close();
 });
 
